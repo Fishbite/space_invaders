@@ -1,4 +1,7 @@
 /* app code */
+(function () {
+  document.onreadystatechange();
+})();
 alert("click OK to start game :)");
 
 const squares = document.querySelectorAll(".grid div");
