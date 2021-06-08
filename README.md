@@ -10,13 +10,16 @@ Another mod we made was to wrap the entire code in an IIFE that contained a
 ```document.onreadystatechange``` 
 
 method, which waits for all assets to be loaded including stylesheets, before starting the
-the game. the entir app code is wrapped in an `if` statement:
+the game. The entir app code is wrapped in an `if` statement:
 
 ```
 if ( document.readyState === 'complete' ) {
     app code here....
 }
 ```
+
+needless to say, if the `readyState` is never `complete` the game will never start. But,
+since the style sheets _must_ be loaded for the game to even display this is ok! :->
 
 Now that we have this working smoothly we are now considering other adaptions & additions:
 
