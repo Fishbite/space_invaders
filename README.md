@@ -19,7 +19,7 @@ if ( document.readyState === 'complete' ) {
 ```
 
 needless to say, if the `readyState` is never `complete` the game will never start. But,
-since the style sheets _must_ be loaded for the game to even display this is ok! :->
+since the style sheets _must_ be loaded for the game to even display ....this is ok! :->
 
 Now that we have this working smoothly we are now considering other adaptions & additions:
 
