@@ -23,6 +23,7 @@ since the style sheets _must_ be loaded for the game to even display ....this is
 
 Now that we have this working smoothly we are now considering other adaptions & additions:
 
+## In no particualr order:
 - responsive and useable on mobile
 - styling
 - addition of levels
@@ -30,6 +31,7 @@ Now that we have this working smoothly we are now considering other adaptions & 
 - alien bombs!
 - player sheilds to hide behind
 - reproduce the game on an HTML `canvas` element
+- code refactoring (it's a bit messy in there at the moment because we had to fudge some stuff)
 
 If you are interested in where the inspiration came from, please dig deep into the grey cells
 of the younger me back in the late 1970's :)
