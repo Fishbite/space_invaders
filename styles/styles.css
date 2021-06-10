@@ -13,6 +13,16 @@ body {
   font-size: 16px;
 }
 
+.container {
+  display: grid;
+  margin: 0 auto;
+  width: 300px;
+}
+
+.container h3 {
+  padding-top: 0.25rem;
+}
+
 .grid {
   display: flex;
   flex-wrap: wrap;

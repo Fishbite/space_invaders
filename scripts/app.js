@@ -41,7 +41,7 @@
         e.preventDefault();
         squares[currentShooterIndex].classList.remove("shooter");
 
-        console.log(e);
+        // console.log(e);
 
         switch (e.target) {
           case lBtn:
@@ -63,9 +63,9 @@
             break;
         }
 
-        if (lBtn) {
-          if (currentShooterIndex % width < -1) width -= 1;
-        }
+        // if (lBtn) {
+        //   if (currentShooterIndex % width < -1) width -= 1;
+        // }
 
         squares[currentShooterIndex].classList.add("shooter");
       }
@@ -124,6 +124,7 @@
 
       //shoot at aliens
       function shoot(e) {
+        e.preventDefault();
         let laserId;
 
         let currentLaserIndex = currentShooterIndex;
@@ -157,7 +158,7 @@
             }
           }
         }
-        switch (e.key || e.target) {
+        switch (e.key) {
           case "ArrowUp":
             laserId = setInterval(moveLaser, 100);
             break;
@@ -167,6 +168,7 @@
             laserId = setInterval(moveLaser, 100);
         }
       }
+
       fBtn.addEventListener("touchstart", shoot);
 
       document.addEventListener("keydown", shoot);
