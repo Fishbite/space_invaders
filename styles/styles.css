@@ -9,6 +9,20 @@
   color: #e09600;
 }
 
+body {
+  font-size: 16px;
+}
+
+.container {
+  display: grid;
+  margin: 0 auto;
+  width: 300px;
+}
+
+.container h3 {
+  padding-top: 0.25rem;
+}
+
 .grid {
   display: flex;
   flex-wrap: wrap;
@@ -38,3 +52,26 @@
 .laser {
   background-color: var(--clr-game-orange);
 }
+
+/* ****** touch controls ****** */
+.ctrls {
+  display: flex;
+  justify-content: space-around;
+  width: 300px;
+  padding-top: 1rem;
+  height: 2rem;
+}
+
+#fireBtn {
+  width: 50%;
+}
+
+#leftBtn {
+  width: 20%;
+}
+
+#rightBtn {
+  width: 20%;
+}
+
+/* ****** touch controls end ****** */

@@ -7,6 +7,11 @@
       const squares = document.querySelectorAll(".grid div");
       const resultsDisplay = document.querySelector("#result");
 
+      // touch screen controls
+      const lBtn = document.getElementById("leftBtn");
+      const rBtn = document.getElementById("rightBtn");
+      const fBtn = document.getElementById("fireBtn");
+
       let width = 15; // grid width
       let currentShooterIndex = 202; // player start pos
       let currentInvaderIndex = 0; // invader start pos
@@ -36,6 +41,18 @@
         e.preventDefault();
         squares[currentShooterIndex].classList.remove("shooter");
 
+        // console.log(e);
+
+        switch (e.target) {
+          case lBtn:
+            if (currentShooterIndex % width !== 0) currentShooterIndex -= 1;
+            break;
+          case rBtn:
+            if (currentShooterIndex % width < width - 1)
+              currentShooterIndex += 1;
+            break;
+        }
+
         switch (e.keyCode) {
           case 37:
             if (currentShooterIndex % width !== 0) currentShooterIndex -= 1;
@@ -45,10 +62,18 @@
               currentShooterIndex += 1;
             break;
         }
+
+        // if (lBtn) {
+        //   if (currentShooterIndex % width < -1) width -= 1;
+        // }
+
         squares[currentShooterIndex].classList.add("shooter");
       }
 
       document.addEventListener("keydown", moveShooter);
+
+      lBtn.addEventListener("touchstart", moveShooter);
+      rBtn.addEventListener("touchstart", moveShooter);
 
       // move alien invaders
       function moveInvaders() {
@@ -99,6 +124,7 @@
 
       //shoot at aliens
       function shoot(e) {
+        e.preventDefault();
         let laserId;
 
         let currentLaserIndex = currentShooterIndex;
@@ -135,8 +161,15 @@
         switch (e.key) {
           case "ArrowUp":
             laserId = setInterval(moveLaser, 100);
+            break;
+        }
+        switch (e.target) {
+          case fBtn:
+            laserId = setInterval(moveLaser, 100);
         }
       }
+
+      fBtn.addEventListener("touchstart", shoot);
 
       document.addEventListener("keydown", shoot);
     }
