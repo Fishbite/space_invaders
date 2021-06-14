@@ -36,7 +36,7 @@ Now that we have this working smoothly we are now considering other adaptions & 
 If you are interested in where the inspiration came from, please dig deep into the grey cells
 of the younger me back in the late 1970's :)
 
-....and a big thanks to Ania who taught me how to get started on this project.
+....and a big thanks to Ania who taught us how to get started on this project.
 
 Thank you Ania ; )
 
