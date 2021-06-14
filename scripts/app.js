@@ -13,10 +13,10 @@
       const fBtn = document.getElementById("fireBtn");
 
       let width = 15; // grid width
-      let currentShooterIndex = 202; // player start pos
-      let currentInvaderIndex = 0; // invader start pos
-      let alienInvadersTakenDown = [];
-      let aliensRemoved = [];
+      let playerPos = 202; // player start pos
+      let invaderPos = 0; // invader start pos
+      let invadersShot = [];
+      let invadersRemoved = [];
       let result = 0;
       let direction = 1;
       let invadersId;
@@ -30,44 +30,42 @@
 
       // draw the alien invaders
       alienInvaders.forEach((invader) =>
-        squares[currentInvaderIndex + invader].classList.add("invader")
+        squares[invaderPos + invader].classList.add("invader")
       );
 
       // draw the shooter
-      squares[currentShooterIndex].classList.add("shooter");
+      squares[playerPos].classList.add("shooter");
 
       // move the shoooter along a line
       function moveShooter(e) {
         e.preventDefault();
-        squares[currentShooterIndex].classList.remove("shooter");
+        squares[playerPos].classList.remove("shooter");
 
         // console.log(e);
 
         switch (e.target) {
           case lBtn:
-            if (currentShooterIndex % width !== 0) currentShooterIndex -= 1;
+            if (playerPos % width !== 0) playerPos -= 1;
             break;
           case rBtn:
-            if (currentShooterIndex % width < width - 1)
-              currentShooterIndex += 1;
+            if (playerPos % width < width - 1) playerPos += 1;
             break;
         }
 
         switch (e.keyCode) {
           case 37:
-            if (currentShooterIndex % width !== 0) currentShooterIndex -= 1;
+            if (playerPos % width !== 0) playerPos -= 1;
             break;
           case 39:
-            if (currentShooterIndex % width < width - 1)
-              currentShooterIndex += 1;
+            if (playerPos % width < width - 1) playerPos += 1;
             break;
         }
 
         // if (lBtn) {
-        //   if (currentShooterIndex % width < -1) width -= 1;
+        //   if (playerPos % width < -1) width -= 1;
         // }
 
-        squares[currentShooterIndex].classList.add("shooter");
+        squares[playerPos].classList.add("shooter");
       }
 
       document.addEventListener("keydown", moveShooter);
@@ -94,15 +92,13 @@
           alienInvaders[i] += direction;
         }
         for (let i = 0; i <= alienInvaders.length - 1; i++) {
-          if (!alienInvadersTakenDown.includes(i)) {
+          if (!invadersShot.includes(i)) {
             squares[alienInvaders[i]].classList.add("invader");
           }
         }
 
         // decide if game is over
-        if (
-          squares[currentShooterIndex].classList.contains("invader", "shooter")
-        ) {
+        if (squares[playerPos].classList.contains("invader", "shooter")) {
           resultsDisplay.innerHTML = "GAME OVER";
           clearInterval(invadersId);
         }
@@ -115,7 +111,7 @@
         }
 
         // decide if win game
-        if (alienInvadersTakenDown.length === alienInvaders.length) {
+        if (invadersShot.length === alienInvaders.length) {
           resultsDisplay.textContent = "You Win!";
           clearInterval(invadersId);
         }
@@ -127,7 +123,7 @@
         e.preventDefault();
         let laserId;
 
-        let currentLaserIndex = currentShooterIndex;
+        let currentLaserIndex = playerPos;
 
         function moveLaser() {
           if (currentLaserIndex - width < 0) {
@@ -151,8 +147,8 @@
 
               const alienRemoved = alienInvaders.indexOf(currentLaserIndex);
               // added next line to remove invaders.
-              aliensRemoved.push(alienRemoved);
-              alienInvadersTakenDown.push(alienRemoved);
+              invadersRemoved.push(alienRemoved);
+              invadersShot.push(alienRemoved);
               result++;
               resultsDisplay.innerHTML = result;
             }
