@@ -43,23 +43,26 @@
         squares[playerPos].classList.remove("shooter");
 
         // console.log(e);
-
-        switch (e.target) {
-          case lBtn:
-            if (playerPos % width !== 0) playerPos -= 1;
-            break;
-          case rBtn:
-            if (playerPos % width < width - 1) playerPos += 1;
-            break;
+        if (loser !== 1) {
+          switch (e.target) {
+            case lBtn:
+              if (playerPos % width !== 0) playerPos -= 1;
+              break;
+            case rBtn:
+              if (playerPos % width < width - 1) playerPos += 1;
+              break;
+          }
         }
 
-        switch (e.keyCode) {
-          case 37:
-            if (playerPos % width !== 0) playerPos -= 1;
-            break;
-          case 39:
-            if (playerPos % width < width - 1) playerPos += 1;
-            break;
+        if (loser !== 1) {
+          switch (e.keyCode) {
+            case 37:
+              if (playerPos % width !== 0) playerPos -= 1;
+              break;
+            case 39:
+              if (playerPos % width < width - 1) playerPos += 1;
+              break;
+          }
         }
 
         squares[playerPos].classList.add("shooter");
@@ -115,7 +118,7 @@
           clearInterval(invadersId);
         }
       }
-      invadersId = setInterval(moveInvaders, 600);
+      invadersId = setInterval(moveInvaders, 60);
 
       //shoot at aliens
       function shoot(e) {
