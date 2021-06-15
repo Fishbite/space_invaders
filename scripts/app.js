@@ -118,7 +118,7 @@
           clearInterval(invadersId);
         }
       }
-      invadersId = setInterval(moveInvaders, 60);
+      invadersId = setInterval(moveInvaders, 600);
 
       //shoot at aliens
       function shoot(e) {
