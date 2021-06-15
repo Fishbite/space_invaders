@@ -20,6 +20,7 @@
       let result = 0;
       let direction = 1;
       let invadersId;
+      loser = 0;
 
       // define the invaders
       // const alienInvaders = [0, 2];
@@ -61,10 +62,6 @@
             break;
         }
 
-        // if (lBtn) {
-        //   if (playerPos % width < -1) width -= 1;
-        // }
-
         squares[playerPos].classList.add("shooter");
       }
 
@@ -100,12 +97,16 @@
         // decide if game is over
         if (squares[playerPos].classList.contains("invader", "shooter")) {
           resultsDisplay.innerHTML = "GAME OVER";
+          loser = 1;
+          console.log("Loser! 1", loser);
           clearInterval(invadersId);
         }
 
         for (let i = 0; i < alienInvaders.length; i++) {
           if (alienInvaders[i] > squares.length) {
             resultsDisplay.innerHTML = "GAME OVER";
+            loser = 1;
+            console.log("Loser! 2", loser);
             clearInterval(invadersId);
           }
         }
@@ -116,52 +117,55 @@
           clearInterval(invadersId);
         }
       }
-      invadersId = setInterval(moveInvaders, 600);
+      invadersId = setInterval(moveInvaders, 10);
 
       //shoot at aliens
-      function shoot(e) {
-        e.preventDefault();
-        let laserId;
+      if (loser !== 1) {
+        console.log("shooting", loser);
+        function shoot(e) {
+          e.preventDefault();
+          let laserId;
 
-        let currentLaserIndex = playerPos;
+          let currentLaserIndex = playerPos;
 
-        function moveLaser() {
-          if (currentLaserIndex - width < 0) {
-            squares[currentLaserIndex].classList.remove("laser");
-            return;
-          } else {
-            squares[currentLaserIndex].classList.remove("laser");
-            currentLaserIndex -= width;
-            squares[currentLaserIndex].classList.add("laser");
-
-            if (squares[currentLaserIndex].classList.contains("invader")) {
+          function moveLaser() {
+            if (currentLaserIndex - width < 0) {
               squares[currentLaserIndex].classList.remove("laser");
-              squares[currentLaserIndex].classList.remove("invader");
-              squares[currentLaserIndex].classList.add("boom");
+              return;
+            } else {
+              squares[currentLaserIndex].classList.remove("laser");
+              currentLaserIndex -= width;
+              squares[currentLaserIndex].classList.add("laser");
 
-              setTimeout(
-                () => squares[currentLaserIndex].classList.remove("boom"),
-                300
-              );
-              clearInterval(laserId);
+              if (squares[currentLaserIndex].classList.contains("invader")) {
+                squares[currentLaserIndex].classList.remove("laser");
+                squares[currentLaserIndex].classList.remove("invader");
+                squares[currentLaserIndex].classList.add("boom");
 
-              const alienRemoved = alienInvaders.indexOf(currentLaserIndex);
-              // added next line to remove invaders.
-              invadersRemoved.push(alienRemoved);
-              invadersShot.push(alienRemoved);
-              result++;
-              resultsDisplay.innerHTML = result;
+                setTimeout(
+                  () => squares[currentLaserIndex].classList.remove("boom"),
+                  300
+                );
+                clearInterval(laserId);
+
+                const alienRemoved = alienInvaders.indexOf(currentLaserIndex);
+                // added next line to remove invaders.
+                invadersRemoved.push(alienRemoved);
+                invadersShot.push(alienRemoved);
+                result++;
+                resultsDisplay.innerHTML = result;
+              }
             }
           }
-        }
-        switch (e.key) {
-          case "ArrowUp":
-            laserId = setInterval(moveLaser, 100);
-            break;
-        }
-        switch (e.target) {
-          case fBtn:
-            laserId = setInterval(moveLaser, 100);
+          switch (e.key) {
+            case "ArrowUp":
+              laserId = setInterval(moveLaser, 100);
+              break;
+          }
+          switch (e.target) {
+            case fBtn:
+              laserId = setInterval(moveLaser, 100);
+          }
         }
       }
 
